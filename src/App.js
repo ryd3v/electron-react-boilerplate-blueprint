@@ -1,34 +1,47 @@
-import { Navbar, Button, Alignment } from '@blueprintjs/core';
+import { Navbar, Alignment } from '@blueprintjs/core';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+
+function Index() {
+  return <h2>Home</h2>;
+}
+
+function Files() {
+  return <h2>About</h2>;
+}
 
 function App() {
   return (
-    <div className='App'>
-      <Navbar className='bp4-dark'>
-        <Navbar.Group align={Alignment.LEFT}>
-          <Navbar.Heading>Blueprint</Navbar.Heading>
-          <Navbar.Divider />
-          <Button className='bp3-minimal' icon='home' text='Home' />
-          <Button className='bp3-minimal' icon='document' text='Files' />
-        </Navbar.Group>
-      </Navbar>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <h1>React Electron</h1>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className='App'>
+        <Navbar className='bp4-dark'>
+          <Navbar.Group align={Alignment.LEFT}>
+            <Navbar.Heading>Blueprint</Navbar.Heading>
+            <Navbar.Divider />
+            <Link className='bp4-button bp4-minimal bp4-icon-home' to='/'>
+              Home
+            </Link>
+            <Link
+              className='bp4-button bp4-minimal bp4-icon-document'
+              to='/files/'
+            >
+              Files
+            </Link>
+          </Navbar.Group>
+        </Navbar>
+
+        <header className='App-header'>
+          <img src={logo} className='App-logo' alt='logo' />
+          <h1>React Electron</h1>
+
+          <Routes>
+            <Route path='/' component={Index} />
+            <Route path='/files/' component={Files} />
+          </Routes>
+        </header>
+      </div>
+    </Router>
   );
 }
 
